@@ -1,0 +1,1 @@
+dartdoc --package-root=packages --omit-generation-time --link-api --include-lib=connect lib/server.dart

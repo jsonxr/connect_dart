@@ -1,0 +1,115 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Middleware class / connect Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="connect" data-type="Middleware">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../connect.html">connect</a> &rsaquo; <a href="../connect/Middleware.html">Middleware</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>Middleware</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class Middleware {
+ Middleware();
+ Middleware.fromFunction(MiddlewareFunction this._func);
+
+ Future&lt;bool&gt; handle(Request req, Response res) {
+   if (_func != null) {
+     return _func(req, res);
+   }
+ }
+
+ void checkConfiguration(Connect connect) {
+ }
+
+ MiddlewareFunction _func;
+}
+</pre>
+</div>
+<h3>Subclasses</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../connect/CookieMiddleware.html">CookieMiddleware</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../connect/LoggerMiddleware.html">LoggerMiddleware</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../connect/RouterMiddleware.html">RouterMiddleware</a></span>, <span class="type-box"><span class="icon-class"></span><a href="../connect/StaticMiddleware.html">StaticMiddleware</a></span></p>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="Middleware">
+<button class="show-code">Code</button>
+new <strong>Middleware</strong>() <a class="anchor-link" href="#Middleware"
+              title="Permalink to Middleware.Middleware">#</a></h4>
+<div class="doc">
+<pre class="source">
+Middleware();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="Middleware.fromFunction">
+<button class="show-code">Code</button>
+new <strong>Middleware.fromFunction</strong>(<a href="../connect/MiddlewareFunction.html">MiddlewareFunction</a> _func) <a class="anchor-link" href="#Middleware.fromFunction"
+              title="Permalink to Middleware.Middleware.fromFunction">#</a></h4>
+<div class="doc">
+<pre class="source">
+Middleware.fromFunction(MiddlewareFunction this._func);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="checkConfiguration">
+<button class="show-code">Code</button>
+void <strong>checkConfiguration</strong>(<a href="../connect/Connect.html">Connect</a> connect) <a class="anchor-link" href="#checkConfiguration"
+              title="Permalink to Middleware.checkConfiguration">#</a></h4>
+<div class="doc">
+<pre class="source">
+void checkConfiguration(Connect connect) {
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="handle">
+<button class="show-code">Code</button>
+<a href="http://api.dartlang.org/dart_async/Future.html">Future</a>&lt;<a href="http://api.dartlang.org/dart_core/bool.html">bool</a>&gt; <strong>handle</strong>(<a href="../connect/Request.html">Request</a> req, <a href="../connect/Response.html">Response</a> res) <a class="anchor-link" href="#handle"
+              title="Permalink to Middleware.handle">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future&lt;bool&gt; handle(Request req, Response res) {
+ if (_func != null) {
+   return _func(req, res);
+ }
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

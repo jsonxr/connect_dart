@@ -1,0 +1,214 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>LoggerMiddleware class / connect Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="connect" data-type="LoggerMiddleware">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../connect.html">connect</a> &rsaquo; <a href="../connect/LoggerMiddleware.html">LoggerMiddleware</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>LoggerMiddleware</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class LoggerMiddleware extends Middleware {
+ Future&lt;bool&gt; handle(Request req, Response res) {
+   var close = res.close;
+   res.close = () {
+     print("LoggerMiddleware");
+     res.write('Hello, world from inside LoggerMiddleware...');
+     String color = _getColorFromStatusCode(res.statusCode);
+     var date = new DateTime.now().toUtc();
+     String mystr = "$GRAY${req.method} ${req.uri} ${color}${res.statusCode} $GRAY${date}";
+     print(mystr + "$WHITE");
+
+     return close();
+   };
+
+   return new Future.value(true);
+ }
+
+ void checkConfiguration(Connect connect) {
+   if (connect.middleware.last != this) {
+     print("Warning, if logger is not last, you can't use status.");
+   }
+ }
+
+ String _getColorFromStatusCode(int statusCode) {
+   if (statusCode &gt;= 500) {
+     return RED;
+   } else if (statusCode &gt;= 400) {
+     return YELLOW;
+   } else if (statusCode &gt;= 300) {
+     return CYAN;
+   } else {
+     return GREEN;
+   }
+ }
+
+//  final Map&lt;String,String&gt; formats = {
+//    'default': ':remote-addr - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"',
+//    'short': ':remote-addr - :method :url HTTP/:http-version :status :res[content-length] - :response-time ms',
+//    'tiny': ':method :url :status :res[content-length] - :response-time ms'
+//  };
+
+ const String WHITE = "\x1b[0m";
+ const String GRAY = "\x1b[90m";
+ const String GREEN = "\x1b[32m";
+ const String YELLOW = "\x1b[33m";
+ const String RED = "\x1b[31m";
+ const String CYAN = "\x1b[36m";
+
+}
+</pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../connect/Middleware.html">Middleware</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>LoggerMiddleware</strong></span></p>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="CYAN">
+<button class="show-code">Code</button>
+const <a href="http://api.dartlang.org/dart_core/String.html">String</a>         <strong>CYAN</strong> <a class="anchor-link"
+            href="#CYAN"
+            title="Permalink to LoggerMiddleware.CYAN">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+const String CYAN = "\x1b[36m"
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="GRAY">
+<button class="show-code">Code</button>
+const <a href="http://api.dartlang.org/dart_core/String.html">String</a>         <strong>GRAY</strong> <a class="anchor-link"
+            href="#GRAY"
+            title="Permalink to LoggerMiddleware.GRAY">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+const String GRAY = "\x1b[90m"
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="GREEN">
+<button class="show-code">Code</button>
+const <a href="http://api.dartlang.org/dart_core/String.html">String</a>         <strong>GREEN</strong> <a class="anchor-link"
+            href="#GREEN"
+            title="Permalink to LoggerMiddleware.GREEN">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+const String GREEN = "\x1b[32m"
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="RED">
+<button class="show-code">Code</button>
+const <a href="http://api.dartlang.org/dart_core/String.html">String</a>         <strong>RED</strong> <a class="anchor-link"
+            href="#RED"
+            title="Permalink to LoggerMiddleware.RED">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+const String RED = "\x1b[31m"
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="WHITE">
+<button class="show-code">Code</button>
+const <a href="http://api.dartlang.org/dart_core/String.html">String</a>         <strong>WHITE</strong> <a class="anchor-link"
+            href="#WHITE"
+            title="Permalink to LoggerMiddleware.WHITE">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+const String WHITE = "\x1b[0m"
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="YELLOW">
+<button class="show-code">Code</button>
+const <a href="http://api.dartlang.org/dart_core/String.html">String</a>         <strong>YELLOW</strong> <a class="anchor-link"
+            href="#YELLOW"
+            title="Permalink to LoggerMiddleware.YELLOW">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+const String YELLOW = "\x1b[33m"
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="checkConfiguration">
+<button class="show-code">Code</button>
+void <strong>checkConfiguration</strong>(<a href="../connect/Connect.html">Connect</a> connect) <a class="anchor-link" href="#checkConfiguration"
+              title="Permalink to LoggerMiddleware.checkConfiguration">#</a></h4>
+<div class="doc">
+<pre class="source">
+void checkConfiguration(Connect connect) {
+ if (connect.middleware.last != this) {
+   print("Warning, if logger is not last, you can't use status.");
+ }
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="handle">
+<button class="show-code">Code</button>
+<a href="http://api.dartlang.org/dart_async/Future.html">Future</a>&lt;<a href="http://api.dartlang.org/dart_core/bool.html">bool</a>&gt; <strong>handle</strong>(<a href="../connect/Request.html">Request</a> req, <a href="../connect/Response.html">Response</a> res) <a class="anchor-link" href="#handle"
+              title="Permalink to LoggerMiddleware.handle">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future&lt;bool&gt; handle(Request req, Response res) {
+ var close = res.close;
+ res.close = () {
+   print("LoggerMiddleware");
+   res.write('Hello, world from inside LoggerMiddleware...');
+   String color = _getColorFromStatusCode(res.statusCode);
+   var date = new DateTime.now().toUtc();
+   String mystr = "$GRAY${req.method} ${req.uri} ${color}${res.statusCode} $GRAY${date}";
+   print(mystr + "$WHITE");
+
+   return close();
+ };
+
+ return new Future.value(true);
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

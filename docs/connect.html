@@ -1,0 +1,192 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>connect Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="favicon.ico">
+        
+        </head>
+        <body data-library="connect">
+        <div class="page">
+        <div class="header">
+          <a href="index.html"><div class="logo"></div></a>
+          <a href="index.html">Dart Documentation</a>
+         &rsaquo; <a href="connect.html">connect</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+<h2><strong>connect</strong> library</h2>
+<div>
+<h3>Functions</h3>
+<div class="method"><h4 id="static">
+<button class="show-code">Code</button>
+<a href="connect/StaticMiddleware.html">StaticMiddleware</a> <strong>static</strong>({<a href="http://api.dartlang.org/dart_core/String.html">String</a> path: null}) <a class="anchor-link" href="#static"
+              title="Permalink to static">#</a></h4>
+<div class="doc">
+<pre class="source">
+StaticMiddleware static({String path: null}) {
+ var s = new StaticMiddleware(path:path);
+ return s;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="router">
+<button class="show-code">Code</button>
+<a href="connect/RouterMiddleware.html">RouterMiddleware</a> <strong>router</strong>() <a class="anchor-link" href="#router"
+              title="Permalink to router">#</a></h4>
+<div class="doc">
+<pre class="source">
+RouterMiddleware router() {
+ return new RouterMiddleware();
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="logger">
+<button class="show-code">Code</button>
+<a href="connect/LoggerMiddleware.html">LoggerMiddleware</a> <strong>logger</strong>() <a class="anchor-link" href="#logger"
+              title="Permalink to logger">#</a></h4>
+<div class="doc">
+<pre class="source">
+LoggerMiddleware logger() {
+ return new LoggerMiddleware();
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="cookie">
+<button class="show-code">Code</button>
+<a href="connect/CookieMiddleware.html">CookieMiddleware</a> <strong>cookie</strong>() <a class="anchor-link" href="#cookie"
+              title="Permalink to cookie">#</a></h4>
+<div class="doc">
+<pre class="source">
+CookieMiddleware cookie() {
+ return new CookieMiddleware();
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="doWhile">
+<button class="show-code">Code</button>
+<a href="http://api.dartlang.org/dart_async/Future.html">Future</a> <strong>doWhile</strong>(<a href="http://api.dartlang.org/dart_core/Iterable.html">Iterable</a> iterable, <a href="http://api.dartlang.org/dart_async/Future.html">Future</a>&lt;<a href="http://api.dartlang.org/dart_core/bool.html">bool</a>&gt; action(i)) <a class="anchor-link" href="#doWhile"
+              title="Permalink to doWhile">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future doWhile(Iterable iterable, Future&lt;bool&gt; action(i)) =&gt;
+   _doWhile(iterable.iterator, action);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="connect">
+<button class="show-code">Code</button>
+<a href="connect/Connect.html">Connect</a> <strong>connect</strong>({<a href="http://api.dartlang.org/dart_core/String.html">String</a> path: null}) <a class="anchor-link" href="#connect"
+              title="Permalink to connect">#</a></h4>
+<div class="doc">
+<pre class="source">
+Connect connect({String path: null}) {
+ var c = new Connect();
+ return c;
+}
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Classes</h3>
+          <div class="type">
+          <h4>
+            <a href="connect/Connect.html"><strong>Connect</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="connect/CookieMiddleware.html"><strong>CookieMiddleware</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="connect/LoggerMiddleware.html"><strong>LoggerMiddleware</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="connect/Middleware.html"><strong>Middleware</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="connect/Request.html"><strong>Request</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="connect/Response.html"><strong>Response</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="connect/RouterMiddleware.html"><strong>RouterMiddleware</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="connect/StaticMiddleware.html"><strong>StaticMiddleware</strong></a>
+          </h4>
+          </div>
+          
+</div>
+<div>
+<h3>Typedefs</h3>
+          <div class="type">
+          <h4>
+            <a href="connect/CloseFunction.html"><strong>CloseFunction</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="connect/MiddlewareFunction.html"><strong>MiddlewareFunction</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="connect/OnCloseFunction.html"><strong>OnCloseFunction</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="connect/WriteFunction.html"><strong>WriteFunction</strong></a>
+          </h4>
+          </div>
+          
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="client-live-nav.js"></script>
+        </body></html>
+        

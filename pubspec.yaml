@@ -1,0 +1,16 @@
+name:  connect
+description:  A server middleware library for dart
+version: 0.0.1
+author: "Jason Rowland <jasonxrowland@gmail.com>"
+homepage: https://github.com/jsonxr/dart-connect
+
+dependencies:
+  args: any
+  logging: any
+  route: any
+
+dev_dependencies:
+  unittest: any
+
+environment:
+  sdk: ">=0.5.7"

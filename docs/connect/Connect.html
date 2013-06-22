@@ -1,0 +1,253 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Connect class / connect Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="connect" data-type="Connect">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../connect.html">connect</a> &rsaquo; <a href="../connect/Connect.html">Connect</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>Connect</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class Connect {
+
+ String path;
+
+ Connect() {
+   this.path = _getPathFromRunningScript();
+ }
+
+ List&lt;Middleware&gt; get middleware =&gt; _middleware;
+
+ void use(Middleware middleware) {
+   _middleware.add(middleware);
+ }
+
+ void bind({address, int port: 3000, int backlog: 0}) {
+   var hosts;
+   if (address == null) {
+     hosts = ['127.0.0.1'];
+   } else if (address is List) {
+     hosts = address;
+   } else {
+     hosts = [address];
+   }
+   final httpPort = (port == 80) ? '' : ':$port';
+
+   hosts.forEach( (String hostList) {
+     hostList.split(',').forEach((host) {
+       HttpServer.bind(host, port, backlog: backlog).then((server) {
+         this.listen(server);
+       });
+       print("listening on http://$host$httpPort");
+     });
+   });
+ }
+
+ void _checkConfiguration() {
+   _middleware.forEach((middleware) {
+     middleware.checkConfiguration(this);
+   });
+ }
+
+ void listen(Stream&lt;HttpRequest&gt; incoming) {
+   _checkConfiguration();
+
+   incoming.listen((HttpRequest request) {
+     var req = new Request(request);
+     var res = req.response;
+
+     bool cont = true;
+     doWhile(_middleware, (Middleware middleware) {
+       return middleware.handle(req, res).then( (c) {
+         cont = c;
+         return c;
+       });
+     }).then((_) {
+       res.close();
+//        if (cont) {
+//          res.write("continue...");
+//        } else {
+//          res.write("don't continue.");
+//        }
+     });
+
+   });
+ }
+
+ void handleRequest(Request req, Response res) {
+   print("server.handleRequest");
+ }
+
+ //--------------------------------------------------------------------------
+ // Private
+ //--------------------------------------------------------------------------
+ final List&lt;Middleware&gt; _middleware = &lt;Middleware&gt;[];
+ var _incoming;
+}
+</pre>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="Connect">
+<button class="show-code">Code</button>
+new <strong>Connect</strong>() <a class="anchor-link" href="#Connect"
+              title="Permalink to Connect.Connect">#</a></h4>
+<div class="doc">
+<pre class="source">
+Connect() {
+ this.path = _getPathFromRunningScript();
+}
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="middleware">
+<button class="show-code">Code</button>
+final <a href="http://api.dartlang.org/dart_core/List.html">List</a>&lt;<a href="../connect/Middleware.html">Middleware</a>&gt;         <strong>middleware</strong> <a class="anchor-link"
+            href="#middleware"
+            title="Permalink to Connect.middleware">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+List&lt;Middleware&gt; get middleware =&gt; _middleware;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="path">
+<button class="show-code">Code</button>
+<a href="http://api.dartlang.org/dart_core/String.html">String</a>         <strong>path</strong> <a class="anchor-link"
+            href="#path"
+            title="Permalink to Connect.path">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String path
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="bind">
+<button class="show-code">Code</button>
+void <strong>bind</strong>({address, <a href="http://api.dartlang.org/dart_core/int.html">int</a> port: 3000, <a href="http://api.dartlang.org/dart_core/int.html">int</a> backlog: 0}) <a class="anchor-link" href="#bind"
+              title="Permalink to Connect.bind">#</a></h4>
+<div class="doc">
+<pre class="source">
+void bind({address, int port: 3000, int backlog: 0}) {
+ var hosts;
+ if (address == null) {
+   hosts = ['127.0.0.1'];
+ } else if (address is List) {
+   hosts = address;
+ } else {
+   hosts = [address];
+ }
+ final httpPort = (port == 80) ? '' : ':$port';
+
+ hosts.forEach( (String hostList) {
+   hostList.split(',').forEach((host) {
+     HttpServer.bind(host, port, backlog: backlog).then((server) {
+       this.listen(server);
+     });
+     print("listening on http://$host$httpPort");
+   });
+ });
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="handleRequest">
+<button class="show-code">Code</button>
+void <strong>handleRequest</strong>(<a href="../connect/Request.html">Request</a> req, <a href="../connect/Response.html">Response</a> res) <a class="anchor-link" href="#handleRequest"
+              title="Permalink to Connect.handleRequest">#</a></h4>
+<div class="doc">
+<pre class="source">
+void handleRequest(Request req, Response res) {
+ print("server.handleRequest");
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="listen">
+<button class="show-code">Code</button>
+void <strong>listen</strong>(<a href="http://api.dartlang.org/dart_async/Stream.html">Stream</a>&lt;<a href="http://api.dartlang.org/dart_io/HttpRequest.html">HttpRequest</a>&gt; incoming) <a class="anchor-link" href="#listen"
+              title="Permalink to Connect.listen">#</a></h4>
+<div class="doc">
+<pre class="source">
+void listen(Stream&lt;HttpRequest&gt; incoming) {
+ _checkConfiguration();
+
+ incoming.listen((HttpRequest request) {
+   var req = new Request(request);
+   var res = req.response;
+
+   bool cont = true;
+   doWhile(_middleware, (Middleware middleware) {
+     return middleware.handle(req, res).then( (c) {
+       cont = c;
+       return c;
+     });
+   }).then((_) {
+     res.close();
+//        if (cont) {
+//          res.write("continue...");
+//        } else {
+//          res.write("don't continue.");
+//        }
+   });
+
+ });
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="use">
+<button class="show-code">Code</button>
+void <strong>use</strong>(<a href="../connect/Middleware.html">Middleware</a> middleware) <a class="anchor-link" href="#use"
+              title="Permalink to Connect.use">#</a></h4>
+<div class="doc">
+<pre class="source">
+void use(Middleware middleware) {
+ _middleware.add(middleware);
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

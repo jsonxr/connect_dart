@@ -1,0 +1,88 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>RouterMiddleware class / connect Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="connect" data-type="RouterMiddleware">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../connect.html">connect</a> &rsaquo; <a href="../connect/RouterMiddleware.html">RouterMiddleware</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>RouterMiddleware</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<pre class="source">
+class RouterMiddleware extends Middleware {
+ Future&lt;bool&gt; handle(Request req, Response res) {
+   print("RouterMiddleware");
+   res.statusCode = HttpStatus.NOT_FOUND;
+   res.statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+   res.write('Hello, world from inside RouterMiddleware...');
+   return new Future.value(true);
+ }
+}
+</pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../connect/Middleware.html">Middleware</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>RouterMiddleware</strong></span></p>
+<div>
+<h3>Methods</h3>
+<div class="method inherited"><h4 id="checkConfiguration">
+<button class="show-code">Code</button>
+void <strong>checkConfiguration</strong>(<a href="../connect/Connect.html">Connect</a> connect) <a class="anchor-link" href="#checkConfiguration"
+              title="Permalink to RouterMiddleware.checkConfiguration">#</a></h4>
+<div class="inherited-from">inherited from <a href="../connect/Middleware.html">Middleware</a> </div><div class="doc">
+<pre class="source">
+void checkConfiguration(Connect connect) {
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="handle">
+<button class="show-code">Code</button>
+<a href="http://api.dartlang.org/dart_async/Future.html">Future</a>&lt;<a href="http://api.dartlang.org/dart_core/bool.html">bool</a>&gt; <strong>handle</strong>(<a href="../connect/Request.html">Request</a> req, <a href="../connect/Response.html">Response</a> res) <a class="anchor-link" href="#handle"
+              title="Permalink to RouterMiddleware.handle">#</a></h4>
+<div class="doc">
+<pre class="source">
+Future&lt;bool&gt; handle(Request req, Response res) {
+ print("RouterMiddleware");
+ res.statusCode = HttpStatus.NOT_FOUND;
+ res.statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+ res.write('Hello, world from inside RouterMiddleware...');
+ return new Future.value(true);
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

@@ -1,0 +1,11 @@
+#!/usr/bin/env dart
+
+import 'package:unittest/unittest.dart';
+import 'package:unittest/vm_config.dart';
+
+import '../test/all_test.dart' as test;
+
+void main() {
+  useVMConfiguration();
+  test.main();
+}
