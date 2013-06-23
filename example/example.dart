@@ -11,9 +11,9 @@ void main() {
 
   var connect = new Connect();
   connect.use(favicon());
-  connect.use(new LoggerMiddleware());
+  connect.use(logger());
   connect.use(static(path:'${Connect.path}/public'));
-  connect.use(mongoSession());
+  connect.use(mongoSession(uri:'mongodb://127.0.0.1/sessions', collectionName:'sessions'));
   connect.use(new RouterMiddleware());
   connect.bind(hosts: hosts);
 }

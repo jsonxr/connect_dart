@@ -34,8 +34,9 @@ class _StaticMiddleware extends Middleware {
         if (!fullPath.startsWith(path)) {
           completer.complete(true);
         }
-
-        res.headers.add('content-type', 'text/plain');
+        Path filePath = new Path(filename);
+        String contentType = mime.getType(filePath.extension);
+        res.headers.add('content-type', contentType);
         file.openRead().pipe(res).then( (_) {
           completer.complete(false);
         });
