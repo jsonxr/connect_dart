@@ -6,6 +6,7 @@ typedef Future OnCloseFunction();
 class Middleware {
   Middleware();
   Middleware.fromFunction(MiddlewareFunction this._func);
+  Pattern pattern;
 
   Future<bool> handle(Request req, Response res) {
     if (_func != null) {

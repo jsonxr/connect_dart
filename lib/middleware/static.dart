@@ -1,6 +1,6 @@
 part of connect;
 
-_StaticMiddleware static({String path: null}) {
+Middleware static({String path: null}) {
   var s = new _StaticMiddleware(path:path);
   return s;
 }
@@ -17,19 +17,17 @@ class _StaticMiddleware extends Middleware {
   }
 
   Future<bool> handle(Request req, Response res) {
-    print("StaticMiddleware.handle");
+    _logger.fine("StaticMiddleware.handle");
     final String filePath = req.uri.path == '/' ? '/index.html' : req.uri.path;
     final String filename = "${path}${filePath}";
     final File file = new File(filename);
 
     Completer<bool> completer = new Completer();
-    print("file=$file");
     file.exists().then((bool found) {
       if (! found) {
-        print("file does not exist $filename");
         return completer.complete(true);
       }
-      print("file exists $filename");
+
       file.fullPath().then((fullPath) {
         if (!fullPath.startsWith(path)) {
           completer.complete(true);

@@ -11,13 +11,21 @@ void main() {
 
   var connect = new Connect();
   connect.use(favicon());
-  connect.use(logger());
+  connect.use(logger(immediate: false));
   connect.use(static(path:'${Connect.path}/public'));
   connect.use(mongoSession(uri:'mongodb://127.0.0.1/sessions', collectionName:'sessions'));
-  connect.use(new RouterMiddleware());
   connect.bind(hosts: hosts);
+
+  var connect2 = new Connect();
+  //connect.use('/auth', connect2);
 }
 //complete -o bashdefault -o default -F _brew brew
+
+//connect.use(logger(immediate: false), pattern: new RegExp(r'/foo/(.*)');
+//connect.use(logger(immediate: false), pattern: new UrlPattern(r'/foo/(\d+)');
+//connect.use(router());
+
+
 
 ArgParser _parser() =>
     new ArgParser()

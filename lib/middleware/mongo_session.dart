@@ -1,6 +1,6 @@
 part of connect;
 
-SessionMiddleware mongoSession({String uri: "mongodb://127.0.0.1/sessions", String collectionName: "sessions"}) {
+Middleware mongoSession({String uri: "mongodb://127.0.0.1/sessions", String collectionName: "sessions"}) {
   return new _MongoSessionMiddleware(uri:uri, collectionName:collectionName);
 }
 
@@ -55,7 +55,7 @@ class _MongoSessionManager extends SessionManager {
     Completer<bool> completer = new Completer();
     _getCollection().then( (sessions) {
       sessions.update({'_id':session.id}, session, upsert: true).then((d) {
-        print("d=$d, updated=${d['updatedExisting']}");
+        _logger.fine("mongo response:=$d");
         bool updated = d['updatedExisting'];
         completer.complete(updated);
       });

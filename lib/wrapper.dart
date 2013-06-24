@@ -16,7 +16,7 @@ abstract class Wrapper<T> {
   ClassMirror get classMirror => _classMirror;
 
   dynamic noSuchMethod(Invocation invocation) {
-    print("delegating ${_className}.${MirrorSystem.getName(invocation.memberName)}");
+    _logger.fine("delegating ${_className}.${MirrorSystem.getName(invocation.memberName)}");
     return _mirror.delegate(invocation);
   }
 

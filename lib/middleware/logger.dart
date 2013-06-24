@@ -1,31 +1,42 @@
 part of connect;
 
-LoggerMiddleware logger() {
-  return new LoggerMiddleware();
+/**
+ * immediate: Log the URI immediately as soon as the filter receives the
+ * request.  The default is false because we don't yet know the status.
+ */
+Middleware logger({bool immediate: false}) {
+  return new _LoggerMiddleware(immediate: immediate);
 }
 
-class LoggerMiddleware extends Middleware {
+class _LoggerMiddleware extends Middleware {
+  _LoggerMiddleware({bool immediate: false}) {
+    _immediate = immediate;
+  }
+
   Future<bool> handle(Request req, Response res) {
-    var close = res.close;
-    res.close = () {
-      print("logger.close...");
-      //print("LoggerMiddleware");
-      //res.write('Hello, world from inside LoggerMiddleware...');
-      String color = _getColorFromStatusCode(res.statusCode);
-      var date = new DateTime.now().toUtc();
+    // Intercept the default close so we can write afterwards
+    if (_immediate) {
+      printLogMessage(res, req);
+    } else {
+      var close = res.close;
+      res.close = () {
+        printLogMessage(res, req);
+        return close();
+      };
+    }
+    return new Future.value(true);
+  }
+
+  void printLogMessage(Response res, Request req) {
+    String color = _getColorFromStatusCode(res.statusCode);
+    var date = new DateTime.now().toUtc();
+    if (_immediate) {
+      String mystr = "$GRAY${req.method} ${req.uri} $GRAY${date}";
+      print(mystr + "$WHITE");
+    } else {
       String mystr = "$GRAY${req.method} ${req.uri} ${color}${res.statusCode} $GRAY${date}";
       print(mystr + "$WHITE");
-
-      return close();
-    };
-
-    var write = res.write;
-    res.write = (Object obj) {
-      print("logger: $obj");
-      write(obj);
-    };
-
-    return new Future.value(true);
+    }
   }
 
   void checkConfiguration(Connect connect) {
@@ -45,6 +56,8 @@ class LoggerMiddleware extends Middleware {
       return GREEN;
     }
   }
+
+  bool _immediate;
 
 //  final Map<String,String> formats = {
 //    'default': ':remote-addr - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"',

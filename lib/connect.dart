@@ -16,7 +16,13 @@ class Connect {
 
   List<Middleware> get middleware => _middleware;
 
-  void use(Middleware middleware) {
+  void use(Middleware middleware, {Pattern pattern: null}) {
+    if (pattern != null) {
+      print("pattern=$pattern");
+      var mirror = reflect(pattern);
+      print(mirror.type.simpleName);
+    }
+    middleware.pattern = pattern;
     _middleware.add(middleware);
   }
 
@@ -50,32 +56,45 @@ class Connect {
     incoming.listen((HttpRequest request) {
       var req = new Request(request);
       var res = req.response;
-      print("");
-      print(req.uri);
       bool cont = true;
       doWhile(_middleware, (Middleware middleware) {
-        //print()
-        var _mirror = reflect(middleware);
-        print(_mirror.type.toString());
-        return middleware.handle(req, res).then( (c) {
-          cont = c;
-          print("middleware continue=$cont");
-          return new Future.value(c);
-        });
+        InstanceMirror _mirror = reflect(middleware);
+        if (middleware.pattern == null || matchesFull(middleware.pattern, req.uri.path)) {
+          print("match ${MirrorSystem.getName(_mirror.type.simpleName)}");
+          return middleware.handle(req, res).then( (c) {
+            cont = c;
+            return c;
+          });
+        } else {
+          print("no match pattern: ${middleware.pattern} for ${req.uri.path}! ${MirrorSystem.getName(_mirror.type.simpleName)}");
+          return new Future.value(true);
+        }
       }).then((_) {
-        //res.close();
-//        if (cont) {
-//          res.write("continue...");
-//        } else {
-//          res.write("don't continue.");
-//        }
+        if (cont) {
+          handle404(req, res);
+        }
+      }).catchError((e) {
+        //TODO: Figure out how to have an application wide error handlier so we don't have to remember
+        // .catchError((e)... everywhere
+        _logger.severe(e);
+        handle500(req, res, e);
       });
-
     });
   }
 
+  void handle404(req, res) {
+    res.statusCode = 404;
+    res.close();
+  }
+
+  void handle500(Request req, Response res, e) {
+    res.statusCode = 500;
+    //res.writeln(e);
+    res.close();
+  }
+
   void handleRequest(Request req, Response res) {
-    print("server.handleRequest");
+    _logger.info("server.handleRequest");
   }
 
   //--------------------------------------------------------------------------

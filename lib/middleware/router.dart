@@ -1,12 +1,12 @@
 part of connect;
 
-RouterMiddleware router() {
+Middleware router() {
   return new RouterMiddleware();
 }
 
 class RouterMiddleware extends Middleware {
   Future<bool> handle(Request req, Response res) {
-    print("RouterMiddleware");
+    _logger.fine("RouterMiddleware");
 
     //res.statusCode = HttpStatus.NOT_FOUND;
     //res.statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
